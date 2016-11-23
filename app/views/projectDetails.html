@@ -1,0 +1,38 @@
+<h3>{{ project.name }}</h3>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Project Details</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>Project Address</h5> {{ project.address }}
+                <h5>Target Amount</h5> {{ project.amountToBeRaised.toString() }}
+            </div>
+            <div class="col-sm-6">
+                <h5>Owner Address</h5> {{ project.ownerAddress }}
+                <h5>Deadline</h5> {{ project.deadlineTime.toString() }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Funding</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <h5>Current Funding</h5> {{ project.currentFundingTotal.toString() }}
+                <h5>Contribute</h5>
+                <input type="text" id="contributionAmount" ng-model="contributionAmount" placeholder="e.g. 50000"/>
+                <button id="Contribute" class="btn btn-primary" ng-click="contribute(contributionAmount)">Contribute</button>
+            </div>
+            <div class="col-sm-6">
+                <h5>No. Of Contributions</h5> {{ project.numberOfContributions.toString() }}
+            </div>
+        </div>
+    </div>
+</div>

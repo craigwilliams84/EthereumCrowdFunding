@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="etherCrowdApp" ng-controller="etherCrowdCtrl">
+<head>
+    <base href="." />
+    <title>EthereumCrowdFunding - A Sample Blockchain Crowd Funding Application</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script src="./angular.js"></script>
+    <script src="./jquery.js"></script>
+    <script src="./bootstrap.js"></script>
+    <script src="./app.js"></script>
+    <script src="./AccountsService.js"></script>
+    <script src="./ProjectService.js"></script>
+    <script src="./ProjectListController.js"></script>
+    <script src="./CreateProjectController.js"></script>
+    <script src="./ProjectDetailsController.js"></script>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#">Ethereum Crowd Funding</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/projects">Projects<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/createProject">Create Project</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><p class="navbar-text">Balance: {{ balance }}</p></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</head>
+<body>
+<div class="container">
+    <div ng-view ></div>
+    <span id="status"></span>
+</div>
+</body>
+</html>
