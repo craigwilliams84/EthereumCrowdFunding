@@ -4,13 +4,13 @@
 contract('Project in isolation', function(accounts) {
 
     it("should be able to fund a project", redeploy(accounts, function(done, project){
-        return project.fund(accounts[2], {from: accounts[0], value: 5000, gas: 3000000}).then(function() {
+        return project.fund(accounts[2], {from: accounts[0], value: 5000, gas: 300000}).then(function() {
             done();
         })
     }));
 
     it("should not be able to fund a from non-hub address", redeploy(accounts, function(done, project){
-        return project.fund(accounts[2], {from: accounts[5], value: 5000, gas: 3000000}).then(function() {
+        return project.fund(accounts[2], {from: accounts[5], value: 5000, gas: 300000}).then(function() {
             done("Funding from non hub account did not throw!");
         }).catch(function(err) {
             //Error is expected
@@ -20,10 +20,10 @@ contract('Project in isolation', function(accounts) {
 
     it("should pay funds to project owner on funding completion", redeploy(accounts, function(done, project){
         var originalOwnerBalance = web3.eth.getBalance(accounts[1]);
-        return project.fund(accounts[2], {from: accounts[0], gas: 3000000, value: 5000}).then(function() {
-            return project.fund(accounts[3], {from: accounts[0], gas: 3000000, value: 3000});
+        return project.fund(accounts[2], {from: accounts[0], gas: 300000, value: 5000}).then(function() {
+            return project.fund(accounts[3], {from: accounts[0], gas: 300000, value: 3000});
         }).then(function() {
-            return project.fund(accounts[4], {from: accounts[0], gas: 3000000, value: 2000});
+            return project.fund(accounts[4], {from: accounts[0], gas: 300000, value: 2000});
         }).then(function() {
             var newOwnerBalance = web3.eth.getBalance(accounts[1]);
             assert.equal(newOwnerBalance.toString(), originalOwnerBalance.plus(10000).toString(), "Project balance not paid to owner on funding completion");
@@ -39,14 +39,14 @@ contract('Project in isolation', function(accounts) {
         var originalAccount3Balance = web3.eth.getBalance(accounts[3]);
         var originalAccount4Balance = web3.eth.getBalance(accounts[4]);
         var originalAccount5Balance = web3.eth.getBalance(accounts[5]);
-        return project.fund(accounts[2], {from: accounts[0], gas: 3000000, value: 5000}).then(function() {
-            return project.fund(accounts[3], {from: accounts[0], gas: 3000000, value: 3000});
+        return project.fund(accounts[2], {from: accounts[0], gas: 300000, value: 5000}).then(function() {
+            return project.fund(accounts[3], {from: accounts[0], gas: 300000, value: 3000});
         }).then(function() {
-            return project.fund(accounts[4], {from: accounts[0], gas: 3000000, value: 1000});
+            return project.fund(accounts[4], {from: accounts[0], gas: 300000, value: 1000});
         }).then(function() {
             return sleep(5000);
         }).then(function() {
-            return project.fund(accounts[5], {from: accounts[0], gas: 3000000, value: 1000});
+            return project.fund(accounts[5], {from: accounts[0], gas: 300000, value: 1000});
         }).then(function() {
             var newAccount2Balance = web3.eth.getBalance(accounts[2]);
             var newAccount3Balance = web3.eth.getBalance(accounts[3]);
@@ -66,10 +66,10 @@ contract('Project in isolation', function(accounts) {
     it("should refund excess on overfunding", redeploy(accounts, function(done, project){
         var originalOwnerBalance = web3.eth.getBalance(accounts[1]);
         var originalOverFunderBalance = web3.eth.getBalance(accounts[4]);
-        return project.fund(accounts[2], {from: accounts[0], gas: 3000000, value: 5000}).then(function() {
-            return project.fund(accounts[3], {from: accounts[0], gas: 3000000, value: 3000});
+        return project.fund(accounts[2], {from: accounts[0], gas: 300000, value: 5000}).then(function() {
+            return project.fund(accounts[3], {from: accounts[0], gas: 300000, value: 3000});
         }).then(function() {
-            return project.fund(accounts[4], {from: accounts[0], gas: 3000000, value: 6000});
+            return project.fund(accounts[4], {from: accounts[0], gas: 300000, value: 6000});
         }).then(function() {
             var newOwnerBalance = web3.eth.getBalance(accounts[1]);
             var newOverFunderBalance = web3.eth.getBalance(accounts[4]);
@@ -82,7 +82,7 @@ contract('Project in isolation', function(accounts) {
     }));
 
     it("should report correct project details", redeploy(accounts, function(done, project){
-        return project.fund(accounts[2], {from: accounts[0], value: 4000, gas: 3000000}).then(function() {
+        return project.fund(accounts[2], {from: accounts[0], value: 4000, gas: 300000}).then(function() {
             return project.getProjectDetails.call();
         }).then(function(details) {
             assert.equal("Test Project", toAscii(details[0]));

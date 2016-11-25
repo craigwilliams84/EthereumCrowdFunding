@@ -5,6 +5,7 @@ module.exports = {
         "createProject.html": "views/createProject.html",
         "projectDetails.html": "views/projectDetails.html",
         "css/bootstrap.css": "css/bootstrap.css",
+        "css/angular-datepicker.css": "css/angular-datepicker.css",
         "app.js": [
             "js/vendor/lightwallet.js",
             "js/vendor/hooked-web3-provider.js",
@@ -12,7 +13,8 @@ module.exports = {
         ],
         "angular.js" :[
             "js/vendor/angular.js",
-            "js/vendor/angular-route.js"
+            "js/vendor/angular-route.js",
+            "js/vendor/angular-datepicker.js"
         ],
         "jquery.js" :[
             "js/vendor/jquery.js",

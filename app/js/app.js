@@ -21,6 +21,10 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 app.controller("etherCrowdCtrl", [ '$scope', '$timeout', 'accountsService', function($scope, $timeout, accountsService) {
     $scope.balance = "";
 
+    $scope.infoMessage = "";
+    $scope.successMessage="";
+    $scope.errorMessage="";
+
     $scope.refreshBalance = function() {
         accountsService.getBalance(function(err, result) {
             if (err) {
@@ -33,7 +37,31 @@ app.controller("etherCrowdCtrl", [ '$scope', '$timeout', 'accountsService', func
         });
     };
 
+    $scope.showInfoMessage = function(message) {
+        setMessages(message, "", "");
+    };
+
+    $scope.showSuccessMessage = function(message) {
+        setMessages("", message, "");
+    };
+
+    $scope.showErrorMessage = function(message) {
+        setMessages("", "", message);
+    };
+
+    var setMessages = function(info, success, error) {
+        $timeout(function() {
+            $scope.infoMessage = info;
+            $scope.successMessage = success;
+            $scope.errorMessage = error;
+        });
+    }
+
     accountsService.init(function() {
         $scope.refreshBalance();
+    });
+
+    $scope.$on('$locationChangeStart', function(event) {
+        setMessages("", "", "");
     });
 }]);

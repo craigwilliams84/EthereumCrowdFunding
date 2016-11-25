@@ -28,7 +28,9 @@
                 <h5>Current Funding</h5> {{ project.currentFundingTotal.toString() }}
                 <h5>Contribute</h5>
                 <input type="text" id="contributionAmount" ng-model="contributionAmount" placeholder="e.g. 50000"/>
-                <button id="Contribute" class="btn btn-primary" ng-click="contribute(contributionAmount)">Contribute</button>
+                <button id="Contribute" class="btn btn-primary"
+                        ng-click="contribute(contributionAmount)"
+                        ng-disabled="contributeInProgress">Contribute</button>
             </div>
             <div class="col-sm-6">
                 <h5>No. Of Contributions</h5> {{ project.numberOfContributions.toString() }}

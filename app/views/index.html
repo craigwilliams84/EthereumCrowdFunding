@@ -4,6 +4,7 @@
     <base href="." />
     <title>EthereumCrowdFunding - A Sample Blockchain Crowd Funding Application</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/angular-datepicker.css">
     <script src="./angular.js"></script>
     <script src="./jquery.js"></script>
     <script src="./bootstrap.js"></script>
@@ -25,7 +26,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/projects">Projects<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/projects">Projects<span class="sr-only">(current)</span></a></li>
                     <li><a href="#/createProject">Create Project</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -37,6 +38,9 @@
 </head>
 <body>
 <div class="container">
+    <div class="alert alert-success" role="alert" ng-hide="!successMessage">{{ successMessage }}</div>
+    <div class="alert alert-info" role="alert" ng-hide="!infoMessage">{{ infoMessage }}</div>
+    <div class="alert alert-danger" role="alert" ng-hide="!errorMessage">{{ errorMessage }}</div>
     <div ng-view ></div>
     <span id="status"></span>
 </div>

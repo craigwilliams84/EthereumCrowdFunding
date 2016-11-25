@@ -3,7 +3,7 @@ angular.module('etherCrowdServices').service('projectService', ['accountsService
         var fundingHub = FundingHub.deployed();
 
         fundingHub.createProject(web3.fromAscii(projectName), fundingTargetInWei, deadlineTimeInSecs, {from: accountsService.getMainAccount(),
-            gas: 3000000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
+            gas: 300000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
             callback();
         }).catch(function(e) {
             callback(e);
@@ -14,7 +14,7 @@ angular.module('etherCrowdServices').service('projectService', ['accountsService
         var fundingHub = FundingHub.deployed();
 
         fundingHub.contribute("0x" + projectAddress, {value: amountToContribute, from: accountsService.getMainAccount(),
-            gas: 3000000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
+            gas: 300000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
             callback();
         }).catch(function(e) {
             callback(e);
@@ -50,6 +50,7 @@ angular.module('etherCrowdServices').service('projectService', ['accountsService
         var project = Project.at(projectAddress);
 
         project.getProjectDetails.call().then(function(projectDetails) {
+            console.log(projectDetails[0]);
             callback(null, {
                 'address': projectAddress,
                 name: web3.toAscii(projectDetails[0]),
