@@ -51,11 +51,11 @@ enum ProjectStatus { FUNDING, PAIDOUT, REFUNDED }
             //Refund all other contributers
             refund();
         } else {
+            uint overContributedAmount = 0;
             if (projectDetails.currentFundingTotal + amountToFund > projectDetails.amountToBeRaised) {
                 //Funded too much
                 //Refund excess
-                uint amountToRefund = (projectDetails.currentFundingTotal + amountToFund) - projectDetails.amountToBeRaised;
-                sendFunds(contributerAddress, amountToRefund);
+                overContributedAmount = (projectDetails.currentFundingTotal + amountToFund) - projectDetails.amountToBeRaised;
 
                 //Recalculate amount to fund
                 amountToFund = projectDetails.amountToBeRaised - projectDetails.currentFundingTotal;
@@ -68,6 +68,11 @@ enum ProjectStatus { FUNDING, PAIDOUT, REFUNDED }
 
                 //Project has been fully funded, payout!
                 payout();
+
+                //Refund if over contributed
+                if (overContributedAmount != 0) {
+                    sendFunds(contributerAddress, overContributedAmount);
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ angular.module('etherCrowdServices').service('projectService', ['accountsService
         var fundingHub = FundingHub.deployed();
 
         fundingHub.createProject(web3.fromAscii(projectName), fundingTargetInWei, deadlineTimeInSecs, {from: accountsService.getMainAccount(),
-            gas: 300000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
+            gas: 1000000, gasPrice: web3.eth.gasPrice.toString(10)}).then(function() {
             callback();
         }).catch(function(e) {
             callback(e);
@@ -23,7 +23,7 @@ angular.module('etherCrowdServices').service('projectService', ['accountsService
 
     this.getProjects = function(callback) {
         var fundingHub = FundingHub.deployed();
-
+        //Uses an event sourcing approach to get the project list
         var projectCreatedEvent = fundingHub.ProjectCreated({},{fromBlock: 0, toBlock: web3.eth.getBlockNumber()});
 
         projectCreatedEvent.get(function(err, logs) {

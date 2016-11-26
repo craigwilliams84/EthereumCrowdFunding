@@ -1,6 +1,7 @@
 angular.module('etherCrowdApp').controller('projectDetailsCtrl', ['$scope', '$routeParams', '$timeout', 'projectService', function($scope, $routeParams, $timeout, projectService){
     $scope.project = {};
     $scope.contributeInProgress = false;
+    $scope.statusHeader = {};
 
     $scope.refreshProject = function() {
         $scope.project = {};
@@ -22,6 +23,16 @@ angular.module('etherCrowdApp').controller('projectDetailsCtrl', ['$scope', '$ro
                 $scope.$parent.showSuccessMessage("Contribution was successful!");
             }
         });
+    };
+
+    $scope.isFundable = function() {
+        return $scope.project.statusCode == 0;
+    };
+
+    $scope.getDeadlineDate = function() {
+        var deadlineDate = new Date($scope.project.deadlineTime * 1000);
+
+        return deadlineDate.toString();
     }
 
     var init = function() {
@@ -31,6 +42,7 @@ angular.module('etherCrowdApp').controller('projectDetailsCtrl', ['$scope', '$ro
             } else {
                 $timeout(function() {
                     $scope.project = project;
+                    setStatusHeader();
                 });
             }
         });
@@ -41,6 +53,14 @@ angular.module('etherCrowdApp').controller('projectDetailsCtrl', ['$scope', '$ro
             $scope.contributeInProgress = value;
         });
     }
+
+    var statusMappings = {0: "Open", 1 : "Completed", 2: "Expired"}
+
+    var setStatusHeader = function() {
+        $scope.statusHeader = statusMappings[$scope.project.statusCode];
+    }
+
+
 
     init();
 

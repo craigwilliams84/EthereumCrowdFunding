@@ -1,8 +1,20 @@
-<h2>Create New Project</h2>
-<div>
-<br><label for="name">Name: </label><input type="text" id="name" ng-model="name" placeholder="e.g., My Awesome Project"></input>
-<br><label for="fundingTarget">Funding Target (wei): </label><input type="text" id="fundingTarget" ng-model="fundingTarget" placeholder="e.g., 10000000"></input>
-<br><label for="deadline">Deadline (secs): </label><datepicker><input type="text" id="deadline" ng-model="deadline" placeholder="e.g., 234234234"></input></datepicker>
-<br><br><button id="Create" class="btn btn-primary" ng-click="createProject(name, fundingTarget, deadline)">Create</button>
-<br><br>
+<div class="page-header">
+    <h2>Create New Project</h2>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Name</h5>
+                <input type="text" id="name" ng-model="name" placeholder="e.g., My Awesome Project"></input>
+                <h5>Funding Target (wei)</h5>
+                <input type="text" id="fundingTarget" ng-model="fundingTarget" placeholder="e.g., 10000000"></input>
+                <h5>Funding Length (days)</h5>
+                <input type="text" id="deadline" ng-model="durationInDays" placeholder="e.g., 234234234"></input>
+                <br /><br /><button id="Create" class="btn btn-primary"
+                                    ng-click="createProject(name, fundingTarget, durationInDays)"
+                                    ng-disabled="creationInProgress">Create</button>
+            </div>
+        </div>
+    </div>
 </div>
